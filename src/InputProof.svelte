@@ -1,51 +1,41 @@
 <script>
     import ProofFramework from "./ProofFramework.svelte"
     import InputSubproof from "./InputSubproof.svelte";
-    import { writable, get} from 'svelte/store'
-
-    let length = 0
-
-    let subproof = writable({
-        premise: [""],
-        body: ["", writable(
-            {
-                premise: [""],
-                body: [""]
-            }
-        )],
-    })
-
-    function updateSignal(){
-        console.log()
-    }
-
-
-    subproof.subscribe(value => {
-        length = countRows(value)
-	});
-
-    $: console.log($subproof)
-
-
+    
     function countRows(proof){
         let rows = proof.premise.length
         for (const elem of proof.body){
             if (typeof elem === "string"){
                 rows += 1
             } else {
-                rows += countRows(get(elem))
+                rows += countRows(elem)
             }
         }
         return rows
     }
 
+    let subproof = {
+        premise: [""],
+        body: ["",
+            {
+                premise: [""],
+                body: [""]
+            }
+        ],
+    }
 
+    let length = countRows(subproof);
+
+    function updateSignal(){
+        console.log(subproof)
+        length = countRows(subproof)
+    }
 
 </script>
 
 <ProofFramework length={length}>
     <svelte:fragment slot="body">
-        <InputSubproof bind:subproof={subproof}/>
+        <InputSubproof bind:subproof={subproof} updateSignal={updateSignal}/>
     </svelte:fragment>
 </ProofFramework>
             
