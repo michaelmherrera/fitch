@@ -1,5 +1,5 @@
 :root {
-	--line-height: 1.2rem;
+	--line-height: 1.6rem;
 	--line-margin-top: 2px;
 }
 
@@ -8,6 +8,14 @@ html, body {
 	width: 100%;
 	height: 100%;
 	font-size: medium;
+}
+
+.proof-framework {
+	display: grid;
+	grid-auto-flow: row;
+	grid-template-columns: auto auto auto;
+	column-gap: 10px;
+	width: max-content
 }
 
 .num-col, .justification-col {
@@ -23,6 +31,14 @@ html, body {
 	margin-top: var(--line-margin-top);
 }
 
+.justification-col > div {
+	display: grid;
+	grid-auto-flow: row;
+	grid-template-columns: auto auto;
+	column-gap: .5rem;
+}
+
+
 .sub-proof {
 	margin-top: 0px !important;
 	margin-bottom: 0px;
@@ -32,19 +48,33 @@ html, body {
 	margin-left: 4px;
 }
 
-	.premise-outer {
+	.premise {
+		margin-top: var(--line-margin-top); 
+		border-left: 2px solid black; 
 		width: fit-content;
 		border-bottom: 2px solid black;
-		height: var(--line-height);
+		height: max-content;
 		box-sizing: border-box;
+		display: grid;
+		grid-auto-flow: row;
+		grid-template-columns: auto;
+		row-gap: 0px;
 	}
 
-	.premise-inner {
-		margin-top: var(--line-margin-top); 
-		margin-bottom: 0px; 
-		border-left: 2px solid black; 
-		height: 100%
+	.premise>div {
+		margin-top: var(--line-margin-top);
+		height: var(--line-height);
 	}
+
+	.premise>div:nth-child(1) {
+		margin-top: 0;
+	}
+
+	.premise>div:last-child {
+		height: calc(var(--line-height) - 2px);
+	}
+
+	
 
 	.proof-body {
 		height: max-content;
