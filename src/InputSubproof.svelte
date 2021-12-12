@@ -2,19 +2,16 @@
     import { writable } from "svelte/store";
     import SubproofFramework from "./SubproofFramework.svelte";
     export let subproof;
-    export let updateSignal
 
     function addStep() {
         subproof.body = [...subproof.body, ""]
-        updateSignal()
     }
 
     function addSubproof() {
         subproof.body = [...subproof.body, { premise: [""], body: [] }];
-        updateSignal()
     }
 
-    $: updateSignal(subproof)
+    
 </script>
 
 <SubproofFramework>
@@ -28,7 +25,7 @@
             {#if typeof elem === "string"}
                 <div><input bind:value={elem} /></div>
             {:else}
-                <svelte:self subproof={elem} updateSignal={updateSignal}/>
+                <svelte:self bind:subproof={elem}/>
             {/if}
         {/each}
         <div>

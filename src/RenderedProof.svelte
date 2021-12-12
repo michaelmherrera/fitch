@@ -2,32 +2,33 @@
     import ProofFramework from "./ProofFramework.svelte";
     import RenderedSubproof from "./RenderedSubproof.svelte";
     import Katex from "./Katex.svelte";
-    let proof = {
-        premise: [
-            "\\exists A (A \\rightarrow B)",
-            "\\exists A (A \\rightarrow B)",
-        ],
-        body: [
-            {
-                premise: [
-                    "\\exists A (A \\rightarrow B)",
-                ],
-                body: ["\\exists A (A \\rightarrow B)",
-                    {
-                premise: [
-                    "\\exists A (A \\rightarrow B)",
-                ],
-                body: ["\\exists A (A \\rightarrow B)",{
-                premise: [
-                    "\\exists A (A \\rightarrow B)",
-                ],
-                body: ["\\exists A (A \\rightarrow B)"],
-            }],
-            }
-                ],
-            },
-        ],
-    };
+    export let proof;
+    // let proof = {
+    //     premise: [
+    //         "\\exists A (A \\rightarrow B)",
+    //         "\\exists A (A \\rightarrow B)",
+    //     ],
+    //     body: [
+    //         {
+    //             premise: [
+    //                 "\\exists A (A \\rightarrow B)",
+    //             ],
+    //             body: ["\\exists A (A \\rightarrow B)",
+    //                 {
+    //             premise: [
+    //                 "\\exists A (A \\rightarrow B)",
+    //             ],
+    //             body: ["\\exists A (A \\rightarrow B)",{
+    //             premise: [
+    //                 "\\exists A (A \\rightarrow B)",
+    //             ],
+    //             body: ["\\exists A (A \\rightarrow B)"],
+    //         }],
+    //         }
+    //             ],
+    //         },
+    //     ],
+    // };
 </script>
 
 <ProofFramework length={8}>
