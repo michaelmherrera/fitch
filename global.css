@@ -18,7 +18,15 @@ html, body {
 	width: max-content
 }
 
-.num-col, .justification-col {
+.input-proof-framework {
+	display: grid;
+	grid-auto-flow: row;
+	grid-template-columns: auto auto auto auto;
+	column-gap: 10px;
+	width: max-content
+}
+
+.num-col, .justification-col , .actions-col{
 	display: grid;
 	grid-auto-flow: row;
 	grid-template-columns: auto;
@@ -26,12 +34,12 @@ html, body {
 	height: fit-content;
 }
 
-.num-col > div, .justification-col > div {
+.num-col > div, .justification-col > div, .actions-col > div {
 	height: var(--line-height);
 	margin-top: var(--line-margin-top);
 }
 
-.justification-col > div {
+.justification-col > div, .actions-col > div {
 	display: grid;
 	grid-auto-flow: row;
 	grid-template-columns: auto auto;
