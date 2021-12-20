@@ -1,37 +1,37 @@
 <script>
-	import RenderedProof from "./RenderedProof.svelte";
-	import InputProof from "./InputProof.svelte"
-	function countRows(proof){
-        let rows = proof.premise.length
-        for (const elem of proof.body){
-            if (typeof elem === "string"){
-                rows += 1
+    import RenderedProof from "./RenderedProof.svelte";
+    import InputProof from "./InputProof.svelte";
+    function numberRows(proof, rowNum) {
+        let rows = proof.premise.length;
+        for (const elem of proof.premise) {
+            elem[1] = rowNum[0];
+            rowNum[0] += 1;
+        }
+        for (const elem of proof.body) {
+            if (typeof elem[0] === "string") {
+                elem[1] = rowNum[0];
+                rowNum[0] += 1;
+                rows += 1;
             } else {
-                rows += countRows(elem)
+                rows += numberRows(elem, rowNum);
             }
         }
-        return rows
+        return rows;
     }
 
     let subproof = {
-        premise: [""],
-        body: ["",
-            {
-                premise: [""],
-                body: [""]
-            }
+        premise: [[""]],
+        body: [
+            [""]
         ],
-    }
+    };
 
-    $: length = countRows(subproof);
+    $: length = numberRows(subproof, [1]);
 
-    $: console.log(subproof)
-
+    $: console.log(subproof);
 </script>
 
 <main>
-	<!-- <RenderedProof proof={subproof}></RenderedProof> -->
-	<InputProof length={length} bind:subproof={subproof}></InputProof>
+    <!-- <RenderedProof proof={subproof}></RenderedProof> -->
+    <InputProof {length} bind:subproof />
 </main>
-
-
