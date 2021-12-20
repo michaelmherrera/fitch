@@ -20056,6 +20056,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			input = element("input");
+    			attr_dev(input, "class", "expression-input");
     			add_location(input, file$1, 19, 17, 463);
     			add_location(div, file$1, 19, 12, 458);
     		},
@@ -20245,8 +20246,9 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			input = element("input");
-    			add_location(input, file$1, 25, 21, 672);
-    			add_location(div, file$1, 25, 16, 667);
+    			attr_dev(input, "class", "expression-input");
+    			add_location(input, file$1, 25, 21, 696);
+    			add_location(div, file$1, 25, 16, 691);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -20400,9 +20402,9 @@ var app = (function () {
     			t2 = space();
     			button1 = element("button");
     			button1.textContent = "+ Subproof";
-    			add_location(button0, file$1, 31, 12, 838);
-    			add_location(button1, file$1, 32, 12, 894);
-    			add_location(div, file$1, 30, 8, 820);
+    			add_location(button0, file$1, 31, 12, 886);
+    			add_location(button1, file$1, 32, 12, 942);
+    			add_location(div, file$1, 30, 8, 868);
     		},
     		m: function mount(target, anchor) {
     			for (let i = 0; i < each_blocks.length; i += 1) {
