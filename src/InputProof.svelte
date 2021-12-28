@@ -1,6 +1,7 @@
 <script>
     import InputSubproof from "./InputSubproof.svelte";
     import ActionsCol from "./ActionsCol.svelte"
+    import InputJustification from "./InputJustification.svelte";
     import Katex from "./Katex.svelte";
     export let length;
     export let subproof;
@@ -22,7 +23,7 @@
         <InputSubproof bind:subproof bind:selectedRow/>
     </div>
     <div class="justification-col">
-        <slot name="justification" />
+        <InputJustification bind:subproof bind:selectedRow></InputJustification>
     </div>
     <div class="actions-col">
         <ActionsCol bind:subproof bind:selectedRow></ActionsCol>

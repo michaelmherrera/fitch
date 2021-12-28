@@ -8,14 +8,14 @@
 <SubproofFramework>
     <svelte:fragment slot="premise">
         {#each subproof.premise as prem}
-            <div><input bind:value={prem[0]} class="expression-input" on:focus={() => selectedRow = prem[1]}/></div>
+            <div><input type="text" bind:value={prem["value"]} class="expression-input" on:focus={() => selectedRow = prem["idx"]}/></div>
         {/each}
     </svelte:fragment>
     <svelte:fragment slot="body">
         {#each subproof.body as elem}
-            {#if typeof elem[0] === "string"}
+            {#if typeof elem["value"] === "string"}
                 <div>
-                    <input bind:value={elem[0]} class="expression-input" on:focus={() => selectedRow = elem[1]}/>
+                    <input bind:value={elem["value"]} class="expression-input" on:focus={() => selectedRow = elem["idx"]}/>
                 </div>
             {:else}
                 <svelte:self bind:subproof={elem} bind:selectedRow/>

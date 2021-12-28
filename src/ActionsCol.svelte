@@ -3,15 +3,15 @@
     export let selectedRow;
     function addStep(i) {
         let tmp = subproof.body;
-        tmp.splice(i, 0, [""]);
+        tmp.splice(i + 1, 0, { value: "", idx: 1, justification: ["", ""] });
         subproof.body = tmp;
     }
 
     function addSubproof(i) {
         let tmp = subproof.body;
         tmp.splice(i, 0, {
-            premise: [[""]],
-            body: [[""]],
+            premise: [{ value: "", idx: 1, justification: ["", ""] }],
+            body: [{ value: "", idx: 1, justification: ["", ""] }],
         });
         subproof.body = tmp;
     }
@@ -22,15 +22,15 @@
 {/each}
 
 {#each subproof.body as elem, i}
-    {#if typeof elem[0] === "string"}
+    {#if typeof elem["value"] === "string"}
         <!-- Only render the buttons for the row whose input box is currently selected -->
-        <div key={elem[1]}>
-            {#if elem[1] === selectedRow}
+        <div key={elem["idx"]}>
+            {#if elem["idx"] === selectedRow}
                 <button on:click={() => addStep(i)}>+ Row</button>
                 <button on:click={() => addSubproof(i)}>+ Subproof</button>
             {/if}
         </div>
     {:else}
-        <svelte:self bind:subproof={elem} bind:selectedRow/>
+        <svelte:self bind:subproof={elem} bind:selectedRow />
     {/if}
 {/each}

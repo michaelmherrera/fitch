@@ -3,7 +3,6 @@
 	import Katex from "./Katex.svelte";
 </script>
 
-<main>
 
 	<div class="proof-framework">
 		<div>#</div>
@@ -21,5 +20,5 @@
             <slot name="justification"></slot>
 		</div>
 	</div>
-</main>
+
 

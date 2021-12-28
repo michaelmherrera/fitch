@@ -1,15 +1,21 @@
 <script>
     import RenderedProof from "./RenderedProof.svelte";
     import InputProof from "./InputProof.svelte";
+    import {GetLatex} from "./toLatex"
+    import _ from "lodash";
+    let pauseHistory = false;
+    let showInput = true;
+    let history = [];
+
     function numberRows(proof, rowNum) {
         let rows = proof.premise.length;
         for (const elem of proof.premise) {
-            elem[1] = rowNum[0];
+            elem["idx"] = rowNum[0];
             rowNum[0] += 1;
         }
         for (const elem of proof.body) {
-            if (typeof elem[0] === "string") {
-                elem[1] = rowNum[0];
+            if (typeof elem["value"] === "string") {
+                elem["idx"] = rowNum[0];
                 rowNum[0] += 1;
                 rows += 1;
             } else {
@@ -19,19 +25,68 @@
         return rows;
     }
 
+    function updateHistory(subproof) {
+        if (!pauseHistory) {
+            history.push(_.cloneDeep(subproof));
+        } else {
+            pauseHistory = false;
+        }
+    }
+
+    document.addEventListener("keydown", function (event) {
+        if (event.metaKey || event.ctrlKey) {
+            if(event.key === "z"){
+                undo();
+            }
+            if(event.key === "c"){
+                showInput = !showInput
+            }
+            
+        }
+    });
+
+    function undo() {
+        pauseHistory = true;
+        if (_.isEqual(history[history.length - 1], subproof)) {
+            history.pop();
+        }
+        if (history.length) {
+            subproof = history.pop();
+        }
+    }
+
     let subproof = {
-        premise: [[""]],
-        body: [
-            [""]
-        ],
+        premise: [{ value: "", idx: 1, justification: ["", ""] }],
+        body: [{ value: "", idx: 1, justification: ["", ""] }],
     };
 
     $: length = numberRows(subproof, [1]);
 
-    $: console.log(subproof);
+    $: updateHistory(subproof);
+
+    $: console.log(subproof)
 </script>
 
 <main>
-    <!-- <RenderedProof proof={subproof}></RenderedProof> -->
-    <InputProof {length} bind:subproof />
+    <div class="main-content">
+        <div>
+            <button on:click={() => undo()}>Undo (Ctrl+Z)</button>
+            <button 
+                on:click={() => (showInput = !showInput)}
+                >{showInput ? "Show Rendered (Ctrl+C)" : "Show Input (Ctrl+C)"}</button
+            >
+        </div>
+        {#if showInput}
+            <InputProof {length} bind:subproof/>
+        {:else}
+            <RenderedProof {subproof} {length} />
+        {/if}
+        <div>
+            <pre>
+                {GetLatex(subproof)}
+            </pre>
+            
+        </div>
+    </div>
 </main>
+
