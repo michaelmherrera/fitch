@@ -38,7 +38,7 @@
             if(event.key === "z"){
                 undo();
             }
-            if(event.key === "c"){
+            if(event.key === "v"){
                 showInput = !showInput
             }
             
@@ -73,7 +73,7 @@
             <button on:click={() => undo()}>Undo (Ctrl+Z)</button>
             <button 
                 on:click={() => (showInput = !showInput)}
-                >{showInput ? "Show Rendered (Ctrl+C)" : "Show Input (Ctrl+C)"}</button
+                >{showInput ? "View Rendered (Ctrl+V)" : "View Input (Ctrl+V)"}</button
             >
         </div>
         {#if showInput}
