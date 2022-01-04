@@ -26,6 +26,6 @@
         <InputJustification bind:subproof bind:selectedRow></InputJustification>
     </div>
     <div class="actions-col">
-        <ActionsCol bind:subproof bind:selectedRow></ActionsCol>
+        <ActionsCol bind:subproof bind:selectedRow parent={true}></ActionsCol>
     </div>
 </div>
